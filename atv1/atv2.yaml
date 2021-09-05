@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+ title: API para cadastro de carros
+ description: API para realizar o cadastro de carros.
+ version: 0.0.1
+servers:
+- url: http://localhost:8080/api
+  description: API de testes
+paths:
+  /cars:
+    get:
+      summary: Busca carros por marca, nome ou cor e tambem busca e ordena em ordem descrescente carros por ano, valor e data de fabricação
+      parameters:
+        - in: query
+          name: brand
+          schema:
+            type: string
+          description: Filtra por marca
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: Filtra por nome
+        - in: query
+          name: color
+          schema:
+            type: string
+          description: Filtra por cor
+        - in: query
+          name: orderName
+          schema:
+            type: string
+          description: Busca todos os registros em ordem alfabetica baseado no nome
+        - in: query
+          name: orderPrice
+          schema:
+            type: string
+          description: Busca todos os registros em ordem decrescente baseados no preço  
+        - in: query
+          name: orderYear
+          schema:
+            type: string
+          description: Busca todos os registros em ordem decrescente baseados no ano  
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+             schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  chassis:
+                    type: string
+                  name:
+                    type: string
+                  brand:
+                    type: string
+                  color:
+                    type: string
+                  price:
+                    type: number
+                  fabricationYear:
+                    type: integer
+    post:
+      summary: cadastra um novo estado
+      requestBody:
+        content:
+          application/json:
+             schema:
+                type: object
+                properties:
+                  chassis:
+                    type: string
+                  name:
+                    type: string
+                  brand:
+                    type: string
+                  color:
+                    type: string
+                  price:
+                    type: number
+                  fabricationYear:
+                    type: integer
+                
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+           application/json:
+             schema:
+                type: object
+                properties:
+                  chassis:
+                    type: string
+                  name:
+                    type: string
+                  brand:
+                    type: string
+                  color:
+                    type: string
+                  price:
+                    type: number
+                  fabricationYear:
+                    type: integer
+                     

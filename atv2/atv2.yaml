@@ -1,0 +1,171 @@
+openapi: 3.0.0
+info:
+ title: API para cadastro de estados
+ description: API para realizar o cadastro de estados.
+ version: 0.0.1
+servers:
+- url: http://localhost:8080/api
+  description: API de testes
+paths:
+  /states:
+    get:
+      summary: Filtra estados ordenado pelo tamanho da população, pelo tamanho da area e por região
+      parameters:
+        - in: query
+          name: orderRegion
+          schema:
+            type: string
+          description: Filtra todos estados e os ordena por região
+        - in: query
+          name: orderPopulation
+          schema:
+            type: string
+          description: Filtra todos estados e os ordena por população
+        - in: query
+          name: orderArea
+          schema:
+            type: string
+          description: Filtra todos estados e os ordena por area 
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+             schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  region:
+                    type: string
+                  population:
+                    type: integer
+                  capital:
+                    type: string
+                  area:
+                    type: number
+                 
+  /states/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: number
+      required: true
+    get:
+      summary: Recupera um estado pelo id.
+     
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+             schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  region:
+                    type: string
+                  population:
+                    type: integer
+                  capital:
+                    type: string
+                  area:
+                    type: number
+        404:
+          description: Estado não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      summary: Deleta estado pelo id.
+      responses:
+        '204':
+          description: Deleted
+        '404':
+          description: id not found
+        '401':
+          description: Unauthorized          
+    put:
+      summary: Altera um estado baseado no id
+      requestBody:
+        content:
+          apllication/json:
+            schema:
+              type: object
+              properties:
+                  name:
+                    type: string
+                  region:
+                    type: string
+                  population:
+                    type: integer
+                  capital:
+                    type: string
+                  area:
+                    type: number
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            apllication/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  region:
+                    type: string
+                  population:
+                    type: integer
+                  capital:
+                    type: string
+                  area:
+                    type: number
+    post:
+      summary: cadastra um novo estado
+      requestBody:
+        content:
+          apllication/json:
+            schema:
+              type: object
+              properties:
+                  name:
+                    type: string
+                  region:
+                    type: string
+                  population:
+                    type: integer
+                  capital:
+                    type: string
+                  area:
+                    type: number
+                
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            apllication/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  region:
+                    type: string
+                  population:
+                    type: integer
+                  capital:
+                    type: string
+                  area:
+                    type: number
+        
